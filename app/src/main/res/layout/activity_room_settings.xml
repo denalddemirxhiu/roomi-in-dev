@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    tools:openDrawer="start">
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient">
+
+
+        <View
+            android:id="@+id/about_us_view"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/element_background_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:layout_width="298dp"
+            android:layout_height="160dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/about_us_view"
+            app:layout_constraintEnd_toEndOf="@+id/about_us_view"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/about_us_view"
+            app:layout_constraintTop_toTopOf="@+id/about_us_view"
+            app:layout_constraintVertical_bias="0.354">
+
+            <TextView
+                android:id="@+id/room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text=""
+                android:textColor="@color/colorText"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/temperature_val"
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="start"
+                android:text=""
+                android:textColor="@color/colorText"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/light_brightness_val"
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="136dp"
+                android:layout_marginBottom="8dp"
+                android:text=""
+                android:textColor="@color/colorText"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_hamburger_menu"
+        app:menu="@menu/activity_hamburger_menu_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

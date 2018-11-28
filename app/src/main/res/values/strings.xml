@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name" translatable="false">roomi</string>
+    <string name="title_activity_navigation_drawer" translatable="false">navigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Name</string>
+    <string name="nav_header_subtitle">Email</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="email_placeholder">Email</string>
+    <string name="password_placeholder">Password</string>
+    <string name="login_button">Login</string>
+    <string name="create_account">create account</string>
+    <string name="welcome_home_message">Welcome</string>
+    <string name="home">home</string>
+    <string name="security">security</string>
+    <string name="kitchen">kitchen</string>
+    <string name="bedroom">bedroom</string>
+    <string name="living_room">living room</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="title_activity_hamburger_menu">HamburgerMenu</string>
+    <string name="rooms">rooms</string>
+    <string name="about_us">about us</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_security">Security</string>
+    <string name="menu_information">Information</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_aboutus">About Us</string>
+    <string name="menu_logout">Log out</string>
+    <string name="menu_exit">Exit</string>
+    <string name="aboutUs_info"> Roomi is an interactive application that allows you to control the settings and configurations of a particular room in your smart home.
+        The core objective of Roomi is to allow the user to access both their room security and smart home settings from one central application. This app will allow users easier and more intuitive
+        access to security and smart home management</string>
+    <string name="about_us_string">About Us</string>
+    <string name="additional_information">Our Goal</string>
+    <string name="additional_info_string">Roomi values ease of use over all attributes. The application\'s main goal is to allow the easier control of various traits of rooms and security throughout homes, offices, and/or labs. Among other features, the application values reliability. To ensure the best user experience these key traits are crucial to the development process. Users are able to change settings about a room such as lighting and temperature. Additional support for third party smart devices will be added in the future. </string>
+    <string name="submit">Submit</string>
+    <string name="set_birthday">Set birthday</string>
+    <string name="birthday">Birthday</string>
+    <string name="username">Username</string>
+    <string name="usernameEditText">Username</string>
+    <string name="firstname">First name</string>
+    <string name="firstnameHint">Firstname</string>
+    <string name="lastname">Last Name</string>
+    <string name="lastnameHint">Lastname</string>
+    <string name="email">Email</string>
+    <string name="email_string">Email</string>
+    <string name="password">Password</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="new_email_address">New email address</string>
+    <string name="confirm_new_email_address">Confirm new email address</string>
+    <string name="old_password">Old Password</string>
+    <string name="confirm_new_email">Confirm new email</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="your_email">Your email</string>
+    <string name="your_password">Your Password</string>
+    <string name="delete_confirm_text">Are you sure about this action? All your data will be lost!</string>
+    <string name="delete_my_account">Delete my Account</string>
+    <string name="no">No</string>
+    <string name="denald_name" translatable="false">Denald Demirxhiu</string>
+    <string name="denald_description">Denald is an aspiring software developer who enjoys music, photography, and technology. He likes to make use of his time by walking his pet dog Kika.</string>
+    <string name="jacob_name" translatable="false">Jacob Ladan</string>
+    <string name="jacob_description">Jacob is going to write his own description.</string>
+    <string name="marko_name" translatable="false">Marko Javorac</string>
+    <string name="marko_description">Marko is going to write his own description.</string>
+</resources>
