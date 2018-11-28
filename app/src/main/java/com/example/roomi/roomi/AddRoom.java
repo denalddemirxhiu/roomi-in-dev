@@ -41,42 +41,6 @@ public class AddRoom extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_hamburger);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        int id = menuItem.getItemId();
-
-                        if (id == R.id.nav_home) {
-                            Intent mAboutUs = new Intent(AddRoom.this, RoomSelector.class);
-                            startActivity(mAboutUs);
-                        } else if (id == R.id.nav_security) {
-                            // Goes to Security Activity
-                        } else if (id == R.id.nav_settings) {
-                            // Goes to Settings Page
-                        } else if (id == R.id.nav_aboutus) {
-                            // Displays the About Us page
-
-                            Intent mAboutUs = new Intent(AddRoom.this, AboutUs.class);
-                            startActivity(mAboutUs);
-
-                        } else if (id == R.id.nav_logout) {
-                            // Logs out and displays the Log In Screen
-
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-
-                        } else if (id == R.id.nav_exit) {
-                            finishAffinity();
-                        }
-
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }});
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,11 +62,7 @@ public class AddRoom extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                } else {
-                    mDrawerLayout.openDrawer(GravityCompat.START);
-                }
+                finish();
                 return true;
         }
 
