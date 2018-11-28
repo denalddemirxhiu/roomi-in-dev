@@ -30,7 +30,8 @@
         <activity android:name=".Settings" />
         <activity android:name=".ChangeEmail" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".DeleteAccount"></activity>
+        <activity android:name=".DeleteAccount" />
+        <activity android:name=".AddRoom" />
     </application>
 
 </manifest>

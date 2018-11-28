@@ -1,8 +1,7 @@
 package com.example.roomi.roomi;
 
-
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.net.wifi.hotspot2.pps.HomeSp;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,47 +13,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-
-public class RoomSettings extends AppCompatActivity {
+public class AddRoom extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    private TextView nameView;
+    private FirebaseDatabase database;
+    private DatabaseReference dbRef;
+
+    private EditText nameInput;
     private EditText temperatureInput;
     private EditText brightnessInput;
     private Button submitButton;
-    private Bundle extras;
-    private String nameVal;
-
-    private FirebaseDatabase database;
-    private DatabaseReference dbRef;
-    RoomDatastructure data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_settings);
-
+        setContentView(R.layout.activity_add_room);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        extras = getIntent().getExtras();
-        nameVal = extras.getString("name");
 
-        setTitle(nameVal);
-        findViews();
+        setTitle(R.string.add_a_room);
         getDatabase();
-
-        nameView.setText("Update Settings");
-        temperatureInput.setHint("Current: " + extras.getInt("temperature") + getString(R.string.degrees_cel));
-        brightnessInput.setHint("Current: " + extras.getInt("brightness") + getString(R.string.percent));
+        getElements();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -68,7 +51,7 @@ public class RoomSettings extends AppCompatActivity {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.nav_home) {
-                            Intent mAboutUs = new Intent(RoomSettings.this, HomeActivity.class);
+                            Intent mAboutUs = new Intent(AddRoom.this, RoomSelector.class);
                             startActivity(mAboutUs);
                         } else if (id == R.id.nav_security) {
                             // Goes to Security Activity
@@ -77,7 +60,7 @@ public class RoomSettings extends AppCompatActivity {
                         } else if (id == R.id.nav_aboutus) {
                             // Displays the About Us page
 
-                            Intent mAboutUs = new Intent(RoomSettings.this, AboutUs.class);
+                            Intent mAboutUs = new Intent(AddRoom.this, AboutUs.class);
                             startActivity(mAboutUs);
 
                         } else if (id == R.id.nav_logout) {
@@ -99,18 +82,16 @@ public class RoomSettings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateData()) {
+                    String name = nameInput.getText().toString();
                     int temperature = Integer.parseInt(temperatureInput.getText().toString());
                     int brightness = Integer.parseInt(brightnessInput.getText().toString());
-                    dbRef.child("temperature").setValue(temperature);
-                    dbRef.child("brightness").setValue(brightness);
-                    Toast toast = Toast.makeText(getApplicationContext(), "Updated " + nameVal, Toast.LENGTH_LONG);
+                    dbRef.child(name).setValue(new RoomDatastructure(name, temperature, brightness, false, true));
+                    Toast toast = Toast.makeText(getApplicationContext(), name + " created!", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                 }
             }
         });
-
-//        TODO: Add Cancel button if user does not want to change values
     }
 
     @Override
@@ -128,19 +109,20 @@ public class RoomSettings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getDatabase() {
-        database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference("rooms/" + nameVal);
+    private void getElements() {
+        nameInput = findViewById(R.id.add_room_name_input);
+        temperatureInput = findViewById(R.id.add_room_temperature_input);
+        brightnessInput = findViewById(R.id.add_room_brightness_input);
+        submitButton = findViewById(R.id.add_room_button);
     }
 
-    private void findViews() {
-        temperatureInput = findViewById(R.id.update_temperature_input);
-        brightnessInput = findViewById(R.id.update_brightness_input);
-        nameView = findViewById(R.id.room_name);
-        submitButton = findViewById(R.id.update_room_button);
+    private void getDatabase() {
+        database = FirebaseDatabase.getInstance();
+        dbRef = database.getReference("rooms");
     }
 
     private boolean validateData() {
+        String name = nameInput.getText().toString();
         int temperature = 0;
         int brightness = 0;
 
@@ -151,6 +133,7 @@ public class RoomSettings extends AppCompatActivity {
             Log.d("IntParse", e.toString());
         }
 
+        if (name.length() < 3 || name.length() > 25) return false;
         if (temperature < 15 || temperature > 30) return false;
         if (brightness < 0 || brightness > 100) return false;
         return true;

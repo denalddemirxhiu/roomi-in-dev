@@ -4,15 +4,19 @@ public class RoomDatastructure {
     private String name;
     private int temperature;
     private int brightness;
+    private boolean securitySetup;
+    private boolean homeSetup;
 
     public RoomDatastructure() {
 
     }
 
-    public RoomDatastructure(String name, int temperature, int brightness) {
+    public RoomDatastructure(String name, int temperature, int brightness, boolean securitySetup, boolean homeSetup) {
         this.name = name;
         this.temperature = temperature;
         this.brightness = brightness;
+        this.securitySetup = securitySetup;
+        this.homeSetup = homeSetup;
     }
 
     public String getName() {
@@ -20,7 +24,15 @@ public class RoomDatastructure {
     }
 
     public void setName(String name) {
-        this.name = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+        String[] arr = name.split(" ");
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(Character.toUpperCase(arr[i].charAt(0)))
+                    .append(arr[i].substring(1)).append(" ");
+        }
+        this.name = sb.toString().trim();
     }
 
     public int getTemperature() {
@@ -37,5 +49,21 @@ public class RoomDatastructure {
 
     public void setBrightness(int brightness) {
         this.brightness = brightness;
+    }
+
+    public boolean isSecuritySetup() {
+        return securitySetup;
+    }
+
+    public void setSecuritySetup(boolean securitySetup) {
+        this.securitySetup = securitySetup;
+    }
+
+    public boolean isHomeSetup() {
+        return homeSetup;
+    }
+
+    public void setHomeSetup(boolean homeSetup) {
+        this.homeSetup = homeSetup;
     }
 }

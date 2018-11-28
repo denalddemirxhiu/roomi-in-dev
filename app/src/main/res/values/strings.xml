@@ -64,4 +64,14 @@
     <string name="jacob_description">Jacob is going to write his own description.</string>
     <string name="marko_name" translatable="false">Marko Javorac</string>
     <string name="marko_description">Marko is going to write his own description.</string>
+    <string name="placeholder_text">placeholder</string>
+    <string name="select_a_room">Select a room</string>
+    <string name="add_a_room">add a room</string>
+    <string name="name">Name</string>
+    <string name="temperature">Temperature Level (15–25°C)</string>
+    <string name="brightness">Brightness Level (0–100%)</string>
+    <string name="temperature_label">Temperature:</string>
+    <string name="brightness_label">Light Brightness:</string>
+    <string name="degrees_cel">°C</string>
+    <string name="percent">%</string>
 </resources>
