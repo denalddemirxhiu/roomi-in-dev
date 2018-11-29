@@ -6,17 +6,20 @@ public class RoomDatastructure {
     private int brightness;
     private boolean securitySetup;
     private boolean homeSetup;
+    private int accessLevel;
 
     public RoomDatastructure() {
 
     }
 
-    public RoomDatastructure(String name, int temperature, int brightness, boolean securitySetup, boolean homeSetup) {
+    public RoomDatastructure(String name, int temperature, int brightness, boolean securitySetup, boolean homeSetup, int accessLevel) {
         this.name = name;
         this.temperature = temperature;
         this.brightness = brightness;
         this.securitySetup = securitySetup;
         this.homeSetup = homeSetup;
+        this.accessLevel = accessLevel;
+
     }
 
     public String getName() {
@@ -65,5 +68,13 @@ public class RoomDatastructure {
 
     public void setHomeSetup(boolean homeSetup) {
         this.homeSetup = homeSetup;
+    }
+
+    public int getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(int accessLevel) {
+        this.accessLevel = accessLevel;
     }
 }

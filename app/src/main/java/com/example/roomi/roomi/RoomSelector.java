@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,17 +34,43 @@ public class RoomSelector extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
+    private int i;
+    private String[] keyList;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authListener;
+    private User user;
+    private FirebaseUser fbUser;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authListener);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room_selector);
+        getWindow().setBackgroundDrawableResource(R.drawable.gradient);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         setTitle(R.string.home);
         getDatabase();
         retrieveData();
+
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() == null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        } else {
+            fbUser = mAuth.getCurrentUser();
+            getDatabase();
+            logoutListener();
+            retrieveData();
+        }
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -57,24 +84,21 @@ public class RoomSelector extends AppCompatActivity {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.nav_home) {
-                            //Do nothing since we are in the same screen
+                            Intent myIntent = new Intent(getApplicationContext(), RoomSelector.class);
+                            startActivity(myIntent);
                         } else if (id == R.id.nav_security) {
                             // Goes to Security Activity
                         } else if (id == R.id.nav_settings) {
                             // Goes to Settings Page
-
                             Intent settings = new Intent(getApplicationContext(), Settings.class);
                             startActivity(settings);
-
                         } else if (id == R.id.nav_aboutus) {
-                            // Displays the About Us page
-
-                            Intent mAboutUs = new Intent(RoomSelector.this, AboutUs.class);
+                            Intent mAboutUs = new Intent(getApplicationContext(), AboutUs.class);
                             startActivity(mAboutUs);
-
                         } else if (id == R.id.nav_logout) {
                             // Logs out and displays the Log In Screen
-                            FirebaseAuth.getInstance().signOut();
+
+                            mAuth.signOut();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
@@ -85,7 +109,9 @@ public class RoomSelector extends AppCompatActivity {
 
                         mDrawerLayout.closeDrawers();
                         return true;
-                    }});
+                    }
+                }
+        );
     }
 
     @Override
@@ -121,24 +147,30 @@ public class RoomSelector extends AppCompatActivity {
             }
         });
     }
-//TODO: Find a way to pass the keys of each node
+
     private void fetchRooms(DataSnapshot dataSnapshot) {
         List<RoomDatastructure> roomList = new ArrayList<>();
+        keyList = new String[(int) dataSnapshot.getChildrenCount()];
+        i = 0;
         roomList.clear();
         for (DataSnapshot roomSnapShot: dataSnapshot.getChildren()) {
             RoomDatastructure room = roomSnapShot.getValue(RoomDatastructure.class);
+            keyList[i] = roomSnapShot.getKey();
             roomList.add(room);
+            i++;
         }
-        generateRoomButtons(roomList);
+        generateRoomButtons(roomList, keyList);
     }
 
-    private void generateRoomButtons(List<RoomDatastructure> roomList) {
+    private void generateRoomButtons(List<RoomDatastructure> roomList, final String[] keyList) {
+        i = 0;
         LinearLayout buttonContainer = findViewById(R.id.button_container);
         buttonContainer.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(900, 200);
         params.setMargins(0, 0, 0, 65);
 
         for (RoomDatastructure room: roomList) {
+            final String key = keyList[i];
             final String name = room.getName();
             final int temperature = room.getTemperature();
             final int brightness = room.getBrightness();
@@ -155,13 +187,14 @@ public class RoomSelector extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(RoomSelector.this, RoomSettings.class);
+                    intent.putExtra("key", key);
                     intent.putExtra("name", name);
                     intent.putExtra("temperature", temperature);
                     intent.putExtra("brightness", brightness);
                     startActivity(intent);
                 }
             });
-
+            i++;
             buttonContainer.addView(button);
         }
 
@@ -183,6 +216,19 @@ public class RoomSelector extends AppCompatActivity {
         });
 
         buttonContainer.addView(addRoomButton);
+    }
+
+    private void logoutListener() {
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+            }
+        };
     }
 
 }

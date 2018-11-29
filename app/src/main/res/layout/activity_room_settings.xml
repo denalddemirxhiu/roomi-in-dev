@@ -7,93 +7,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:openDrawer="start"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    tools:openDrawer="start" >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="28dp"
+                android:text="Room"
+                android:textColor="@color/colorText"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/name_val"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/name"
+                android:textSize="22sp"
+                android:textColor="@color/colorText"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/update_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/element_background_light"
+                android:ems="10"
+                android:hint=""
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/temperature_val"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/temperature"
+                android:textSize="22sp"
+                android:textColor="@color/colorText"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/update_temperature_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/element_background_light"
+                android:ems="10"
+                android:hint=""
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/brightness_val"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/brightness"
+                android:textSize="22sp"
+                android:textColor="@color/colorText"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/update_brightness_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/element_background_light"
+                android:ems="10"
+                android:hint=""
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/colorText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="36dp"
+                android:gravity="center_horizontal"
+                android:paddingBottom="36dp" >
+
+                <Button
+                    android:id="@+id/update_room_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/submit"
+                    android:background="@drawable/element_background_dark"
+                    android:textAllCaps="false"
+                    android:width="100dp"
+                    android:textColor="@color/colorText"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="25dp" />
+
+                <Button
+                    android:id="@+id/cancel_update_room_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    android:background="@drawable/element_background_dark"
+                    android:textAllCaps="false"
+                    android:width="100dp"
+                    android:textColor="@color/red"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <TextView
-            android:id="@+id/room_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="28dp"
-            android:text="Room"
-            android:textColor="@color/colorText"
-            android:textSize="26sp" />
-
-        <TextView
-            android:id="@+id/temperature_val"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="@string/temperature"
-            android:textSize="22sp"
-            android:textColor="@color/colorText"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:layout_marginBottom="8dp"/>
-
-        <EditText
-            android:id="@+id/update_temperature_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/element_background_light"
-            android:ems="10"
-            android:hint=""
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/colorText" />
-
-        <TextView
-            android:id="@+id/brightness_val"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="@string/brightness"
-            android:textSize="22sp"
-            android:textColor="@color/colorText"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:layout_marginBottom="8dp"/>
-
-        <EditText
-            android:id="@+id/update_brightness_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/element_background_light"
-            android:ems="10"
-            android:hint=""
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/colorText" />
-
-        <Button
-            android:id="@+id/update_room_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/submit"
-            android:background="@drawable/element_background_dark"
-            android:textAllCaps="false"
-            android:width="100dp"
-            android:textColor="@color/colorText"
-            android:textSize="20sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"/>
-
-    </LinearLayout>
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_hamburger_menu"
+        app:menu="@menu/activity_hamburger_menu_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
