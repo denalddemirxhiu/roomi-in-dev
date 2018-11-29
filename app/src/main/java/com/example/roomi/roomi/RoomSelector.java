@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,6 +62,10 @@ public class RoomSelector extends AppCompatActivity {
                             // Goes to Security Activity
                         } else if (id == R.id.nav_settings) {
                             // Goes to Settings Page
+
+                            Intent settings = new Intent(getApplicationContext(), Settings.class);
+                            startActivity(settings);
+
                         } else if (id == R.id.nav_aboutus) {
                             // Displays the About Us page
 
@@ -69,7 +74,7 @@ public class RoomSelector extends AppCompatActivity {
 
                         } else if (id == R.id.nav_logout) {
                             // Logs out and displays the Log In Screen
-
+                            FirebaseAuth.getInstance().signOut();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

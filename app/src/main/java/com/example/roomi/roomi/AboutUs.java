@@ -67,24 +67,33 @@ public class AboutUs extends AppCompatActivity {
                         int id = menuItem.getItemId();
 
                         if (id == R.id.nav_home) {
+                            // Goes to home activity
+
                             Intent myIntent = new Intent(getApplicationContext(), RoomSelector.class);
                             AboutUs.this.startActivity(myIntent);
+
                         } else if (id == R.id.nav_security) {
                             // Goes to Security Activity
                         } else if (id == R.id.nav_settings) {
                             // Goes to Settings Page
+
                             Intent settings = new Intent(getApplicationContext(), Settings.class);
                             startActivity(settings);
+
                         } else if (id == R.id.nav_aboutus) {
+
                             // Goes to about us page
                             Intent aboutUs = new Intent(getApplicationContext(), AboutUs.class);
                             startActivity(aboutUs);
+
                         } else if (id == R.id.nav_logout) {
+
                             // Logs out and displays the Log In Screen
                             mAuth.signOut();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+
                         } else if (id == R.id.nav_exit) {
                             finishAffinity();
                         }

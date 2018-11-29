@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/firstName"
@@ -175,25 +175,23 @@
 
             <Button
                 android:id="@+id/submit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
                 android:layout_marginTop="35dp"
+                android:layout_marginBottom="40dp"
                 android:background="@drawable/element_background_dark"
                 android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@color/colorText"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center|bottom"
-                android:layout_marginTop="40dp"
                 android:visibility="gone"
                 android:layout_marginBottom="40dp"
                 android:indeterminateTint="@color/colorPrimary"
@@ -205,7 +203,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/submit" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 

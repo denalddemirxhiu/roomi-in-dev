@@ -74,4 +74,7 @@
     <string name="brightness_label">Light Brightness:</string>
     <string name="degrees_cel">°C</string>
     <string name="percent">%</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_email">Change email</string>
+    <string name="delete_account">Delete Account</string>
 </resources>

@@ -92,7 +92,7 @@ public class Registration extends AppCompatActivity {
                         .addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(Registration.this, "Create user: " + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+
                                 progressBar.setVisibility(View.GONE);
 
                                 if (!task.isSuccessful()) {
@@ -138,6 +138,8 @@ public class Registration extends AppCompatActivity {
                                                         mReference.child("users").child(userId).child("lastName").setValue(lastName.getText().toString());
                                                         mReference.child("users").child(userId).child("email").setValue(email);
                                                         mReference.child("users").child(userId).child("username").setValue(username.getText().toString());
+
+                                                        Toast.makeText(Registration.this, "Account successfully created!", Toast.LENGTH_SHORT).show();
 
                                                         Intent home = new Intent(Registration.this, HomeActivity.class);
                                                         startActivity(home);

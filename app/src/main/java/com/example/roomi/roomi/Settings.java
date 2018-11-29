@@ -35,7 +35,7 @@ public class Settings extends AppCompatActivity {
     private View headerView;
     private User user;
     private TextView fullName, fullNameMenu, emailMenu;;
-    private Button emailChange, passwordChange, usernameChange, deleteAccount;
+    private Button emailChange, passwordChange, deleteAccount;
 
     @Override
     protected void onStart() {
@@ -82,13 +82,6 @@ public class Settings extends AppCompatActivity {
             public void onClick(View v) {
                 Intent password = new Intent(Settings.this, ChangePassword.class);
                 startActivity(password);
-            }
-        });
-
-        usernameChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
@@ -156,7 +149,6 @@ public class Settings extends AppCompatActivity {
     public void findViews() {
         emailChange = findViewById(R.id.emailChange);
         passwordChange = findViewById(R.id.passwordChange);
-        usernameChange = findViewById(R.id.usernameChange);
         deleteAccount = findViewById(R.id.deleteAccount);
         fullName = findViewById(R.id.fullName);
 
