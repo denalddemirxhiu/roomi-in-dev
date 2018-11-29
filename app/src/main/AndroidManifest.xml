@@ -32,6 +32,13 @@
         <activity android:name=".ChangePassword" />
         <activity android:name=".DeleteAccount" />
         <activity android:name=".AddRoom" />
+        <activity android:name=".SecuritySelector" />
+        <activity android:name=".SecurityRoomSelector" />
+        <activity android:name=".PersonnelSettings" />
+        <activity android:name=".SecurityRoomSettings" />
+        <activity android:name=".PersonnelAdd" />
+        <activity android:name=".PersonnelSelector"></activity>
+        <activity android:name=".SecurityAddRoom"></activity>
     </application>
 
 </manifest>

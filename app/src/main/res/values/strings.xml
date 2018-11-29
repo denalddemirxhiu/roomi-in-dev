@@ -78,4 +78,11 @@
     <string name="change_password">Change Password</string>
     <string name="change_email">Change email</string>
     <string name="delete_account">Delete Account</string>
+    <string name="add_access_level_0_5">Access Level (0-5)</string>
+    <string name="select_a_person">Select a person</string>
+    <string name="avatar_colour">Avatar Colour</string>
+    <string name="update_security_settings">Update Security Settings</string>
+    <string name="add_security_room">Add Security Room</string>
+    <string name="add_a_person">Add a person</string>
+    <string name="personnel">Personnel</string>
 </resources>

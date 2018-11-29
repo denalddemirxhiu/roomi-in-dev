@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,14 +34,16 @@ public class RoomSelector extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private FirebaseDatabase database;
-    private DatabaseReference dbRef;
+    private DatabaseReference dbRef, dbUserRef;
     private int i;
     private String[] keyList;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authListener;
     private User user;
     private FirebaseUser fbUser;
-
+    private NavigationView navigationView;
+    private View headerView;
+    private TextView fullNameMenu, emailMenu;
 
     @Override
     protected void onStart() {
@@ -67,6 +70,7 @@ public class RoomSelector extends AppCompatActivity {
             finish();
         } else {
             fbUser = mAuth.getCurrentUser();
+            findViews();
             getDatabase();
             logoutListener();
             retrieveData();
@@ -88,6 +92,8 @@ public class RoomSelector extends AppCompatActivity {
                             startActivity(myIntent);
                         } else if (id == R.id.nav_security) {
                             // Goes to Security Activity
+                            Intent security = new Intent(getApplicationContext(), SecuritySelector.class);
+                            startActivity(security);
                         } else if (id == R.id.nav_settings) {
                             // Goes to Settings Page
                             Intent settings = new Intent(getApplicationContext(), Settings.class);
@@ -132,6 +138,7 @@ public class RoomSelector extends AppCompatActivity {
     private void getDatabase() {
         database = FirebaseDatabase.getInstance();
         dbRef = database.getReference("rooms");
+        dbUserRef = database.getReference("users/" + FirebaseAuth.getInstance().getUid());
     }
 
     private void retrieveData() {
@@ -139,6 +146,18 @@ public class RoomSelector extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fetchRooms(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("roomi", "Data retrieval error...", databaseError.toException());
+            }
+        });
+
+        dbUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                fetchAndUpdateNavDrawer(dataSnapshot);
             }
 
             @Override
@@ -160,6 +179,25 @@ public class RoomSelector extends AppCompatActivity {
             i++;
         }
         generateRoomButtons(roomList, keyList);
+    }
+
+    private void findViews() {
+        navigationView = findViewById(R.id.nav_view);
+        headerView = navigationView.getHeaderView(0);
+        fullNameMenu = headerView.findViewById(R.id.fullNameUser);
+        emailMenu = headerView.findViewById(R.id.emailUser);
+    }
+
+    private void fetchAndUpdateNavDrawer(DataSnapshot dataSnapshot) {
+        user = dataSnapshot.getValue(User.class);
+        if (user != null) {
+            fullNameMenu.setText(user.getFirstName() + " " + user.getLastName());
+            emailMenu.setText(user.getEmail());
+        } else {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 
     private void generateRoomButtons(List<RoomDatastructure> roomList, final String[] keyList) {

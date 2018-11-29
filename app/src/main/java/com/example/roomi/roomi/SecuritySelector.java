@@ -21,13 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
-public class HomeActivity extends AppCompatActivity {
+public class SecuritySelector extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authListener;
-    private TextView welcomeString, fullNameMenu, emailMenu;
+    private TextView fullNameMenu, emailMenu;
     private NavigationView navigationView;
     private View headerView;
     private FirebaseUser fbUser;
@@ -42,10 +41,12 @@ public class HomeActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(authListener);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_screen);
+        setTitle("Security");
+        setContentView(R.layout.activity_security_selector);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -75,12 +76,9 @@ public class HomeActivity extends AppCompatActivity {
 
                         if (id == R.id.nav_home) {
                             Intent myIntent = new Intent(getApplicationContext(), RoomSelector.class);
-                            HomeActivity.this.startActivity(myIntent);
+                            startActivity(myIntent);
                         } else if (id == R.id.nav_security) {
-                            // Goes to Security Activity
-
-                            Intent security = new Intent(getApplicationContext(), SecuritySelector.class);
-                            startActivity(security);
+                            // Already at security activity so do nothing
                         } else if (id == R.id.nav_settings) {
                             // Goes to Settings Page
                             Intent settings = new Intent(getApplicationContext(), Settings.class);
@@ -106,44 +104,30 @@ public class HomeActivity extends AppCompatActivity {
                 }
         );
 
-        View homeButton = findViewById(R.id.home_button);
 
-        homeButton.setOnClickListener(new View.OnClickListener() {
+        View personnel_button = findViewById(R.id.personnel_button);
+
+        personnel_button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(HomeActivity.this, RoomSelector.class);
-                HomeActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(SecuritySelector.this, PersonnelSelector.class);
+                SecuritySelector.this.startActivity(myIntent);
             }
         });
 
-        View securityButton = findViewById(R.id.security_button);
+        View homeSecurityButton = findViewById(R.id.rooms_button);
 
-        securityButton.setOnClickListener(new View.OnClickListener() {
+        homeSecurityButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent security = new Intent(getApplicationContext(), SecuritySelector.class);
-                startActivity(security);
+            public void onClick(View view) {
+                Intent myIntent = new Intent(SecuritySelector.this, SecurityRoomSelector.class);
+                SecuritySelector.this.startActivity(myIntent);
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if(mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                } else {
-                    mDrawerLayout.openDrawer(GravityCompat.START);
-                }
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void findViews() {
-        welcomeString = findViewById(R.id.welcomeString);
         navigationView = findViewById(R.id.nav_view);
         headerView = navigationView.getHeaderView(0);
         fullNameMenu = headerView.findViewById(R.id.fullNameUser);
@@ -161,7 +145,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
                 if (user != null) {
-                    welcomeString.setText("Welcome, " + user.getFirstName());
                     fullNameMenu.setText(user.getFirstName() + " " + user.getLastName());
                     emailMenu.setText(user.getEmail());
                 } else {
@@ -185,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
-                    startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
             }
@@ -193,5 +176,18 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if(mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                }
+                return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 }

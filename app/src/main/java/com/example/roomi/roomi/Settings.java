@@ -104,7 +104,10 @@ public class Settings extends AppCompatActivity {
                             Intent myIntent = new Intent(getApplicationContext(), RoomSelector.class);
                             startActivity(myIntent);
                         } else if (id == R.id.nav_security) {
-                            // Goes to Security Activity TODO
+                            // Goes to Security Activity
+
+                            Intent security = new Intent(getApplicationContext(), SecuritySelector.class);
+                            startActivity(security);
                         } else if (id == R.id.nav_settings) {
                             // Goes to Settings Page
 
